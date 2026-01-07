@@ -7,8 +7,10 @@ from datasets import Dataset
 from unsloth import FastLanguageModel
 from datetime import datetime
 from trl import SFTConfig, SFTTrainer
+from huggingface_hub import login
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+
 SYSTEM_PROMPT = "あなたは日本語の通訳者です。日本語から他の言語へ、または他の言語から日本語へ翻訳してください。"
 USER_PROMPT = "以下のセグメントを、追加の説明を一切含めずに \"{target_lang_code}\" に翻訳してください。\"{target_lang_code}\" におけるスタイル、ニュアンス、および実用的な文脈を十分に反映させてください：\"{text}\""
 
@@ -22,6 +24,18 @@ DATASET_PATH = f"{PROJECT_ROOT}/data/{DATASET_NAME}.json"
 
 TIME = datetime.now().strftime("%H-%M-%S_%d-%m-%Y")
 RUN_NAME = f"Mazii-MT-{TIME}"
+
+def load_env_file(env_path: Path) -> None:
+    """Populate os.environ entries from a simple KEY=VALUE .env file."""
+    if not env_path.exists():
+        return
+    for raw_line in env_path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        if key:
+            os.environ.setdefault(key.strip(), value.strip())
 
 def create_conversation(sample):
     return {
@@ -60,6 +74,12 @@ def formatting_func(examples):
             add_generation_prompt=False
         )
         return [text]
+
+load_env_file(PROJECT_ROOT / ".env")
+hf_token = os.getenv("HF_TOKEN")
+if not hf_token:
+    raise RuntimeError("HF_TOKEN is not set in the environment or .env file.")
+login(token=hf_token)
 
 if __name__ == "__main__":
     df = pd.read_json(DATASET_PATH)
