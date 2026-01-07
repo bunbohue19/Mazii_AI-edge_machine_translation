@@ -20,7 +20,7 @@ LOAD_IN_4BIT = False
 
 MODEL_ID = os.getenv("MODEL_ID")
 DATASET_NAME = os.getenv("DATASET_NAME")
-DATASET_PATH = f"{PROJECT_ROOT}/data/{DATASET_NAME}.json"
+DATASET_PATH = f"{PROJECT_ROOT}/data/train/{DATASET_NAME}.json"
 
 TIME = datetime.now().strftime("%H-%M-%S_%d-%m-%Y")
 RUN_NAME = f"Mazii-MT-{TIME}"
