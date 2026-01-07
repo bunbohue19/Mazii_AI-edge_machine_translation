@@ -1,0 +1,2 @@
+You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese. 
+Please translate the following segment into Vietnamese without any additional explanation, while fully capturing the style, nuance, and practical context of Vietnamese: \"しかし、提督たちはドイツの航空攻撃で撃沈されることを恐れていたので、イギリス海軍の艦船はほとんど侵略ルートの近くに拠点を置いていませんでした。\"

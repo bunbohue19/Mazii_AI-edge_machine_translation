@@ -12,7 +12,7 @@ from huggingface_hub import login
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 SYSTEM_PROMPT = "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
-USER_PROMPT = "Please translate the following segment into \"{target_lang_code}\" without any additional explanation, while fully capturing the style, nuance, and practical context of \"{target_lang_code}\": \"{text}\""
+USER_PROMPT = "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
 
 MAX_SEQ_LENGTH = 4096
 DTYPE = torch.bfloat16
