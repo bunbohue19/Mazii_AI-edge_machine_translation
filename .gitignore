@@ -1,0 +1,10 @@
+# Files
+.vscode
+*.env
+
+# Folders
+__pycache__
+data/
+model/
+logs/
+output/
