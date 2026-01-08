@@ -2,51 +2,62 @@
 Path: https://drive.google.com/file/d/1T3FDYtUANPtn1qbbVwRLU1fsXi-igVn7/view?usp=sharing
 
 # Project Structure
-
-```
-.
-|-- README.md
-|-- requirements.txt
-`-- src
-    |-- inference
-    |   |-- app.py
-    |   |-- app.sh
-    |   |-- base_model
-    |   |   |-- __init__.py
-    |   |   |-- chat.py
-    |   |   |-- completion.py
-    |   |   `-- translation.py
-    |   |-- client.py
-    |   |-- config
-    |   |   `-- config.yml
-    |   |-- main.py
-    |   |-- main.sh
-    |   `-- server.py
-    |-- synthesize-data
-    |   |-- combine.py
-    |   `-- ja2xx
-    |       |-- translation_runner.py
-    |       `-- translation_runner.sh
-    |-- test
-    |   `-- test.sh
-    `-- train
-        `-- SFT
-            |-- main.py
-            |-- main.sh
-            `-- unsloth_compiled_cache
-                |-- UnslothBCOTrainer.py
-                |-- UnslothCPOTrainer.py
-                |-- UnslothDPOTrainer.py
-                |-- UnslothGKDTrainer.py
-                |-- UnslothGRPOTrainer.py
-                |-- UnslothKTOTrainer.py
-                |-- UnslothNashMDTrainer.py
-                |-- UnslothOnlineDPOTrainer.py
-                |-- UnslothORPOTrainer.py
-                |-- UnslothPPOTrainer.py
-                |-- UnslothPRMTrainer.py
-                |-- UnslothRLOOTrainer.py
-                |-- UnslothRewardTrainer.py
-                |-- UnslothSFTTrainer.py
-                `-- UnslothXPOTrainer.py
-```
+- data/
+  - synthetic-data/
+    - input/
+    - output/
+  - test/
+  - train/
+    - data.json
+- logs/
+- model/
+- output/
+  - Mazii-MT-13-28-30_06-01-2026/
+- src/
+  - inference/
+    - base_model/
+      - __init__.py
+      - chat.py
+      - completion.py
+      - translation.py
+    - config/
+      - config.yml
+    - app.py
+    - app.sh
+    - client.py
+    - main.py
+    - main.sh
+    - requirements.sh
+    - server.py
+  - synthesize-data/
+    - ja2xx/
+      - translation_runner.py
+      - translation_runner.sh
+    - xx2ja/
+    - combine.py
+  - test/
+    - test.sh
+    - test.txt
+  - train/
+    - SFT/
+      - unsloth_compiled_cache/
+        - UnslothBCOTrainer.py
+        - UnslothCPOTrainer.py
+        - UnslothDPOTrainer.py
+        - UnslothGKDTrainer.py
+        - UnslothGRPOTrainer.py
+        - UnslothKTOTrainer.py
+        - UnslothNashMDTrainer.py
+        - UnslothORPOTrainer.py
+        - UnslothOnlineDPOTrainer.py
+        - UnslothPPOTrainer.py
+        - UnslothPRMTrainer.py
+        - UnslothRLOOTrainer.py
+        - UnslothRewardTrainer.py
+        - UnslothSFTTrainer.py
+        - UnslothXPOTrainer.py
+      - main.py
+      - main.sh
+    - requirements.sh
+    - requirements.txt
+- README.md
