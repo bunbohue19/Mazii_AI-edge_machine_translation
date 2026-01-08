@@ -44,8 +44,7 @@ def main():
     
     server.run()
 
-PROJECT_ROOT = os.getenv("PROJECT_ROOT")
-load_env_file(PROJECT_ROOT / ".env")
+load_env_file(".env")
 hf_token = os.getenv("HF_TOKEN")
 if not hf_token:
     raise RuntimeError("HF_TOKEN is not set in the environment or .env file.")
