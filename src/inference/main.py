@@ -44,6 +44,7 @@ def main():
     
     server.run()
 
+PROJECT_ROOT = os.getenv("PROJECT_ROOT")
 load_env_file(PROJECT_ROOT / ".env")
 hf_token = os.getenv("HF_TOKEN")
 if not hf_token:

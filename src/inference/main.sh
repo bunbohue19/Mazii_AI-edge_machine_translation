@@ -1,4 +1,4 @@
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)"
+export PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)"
 
 # echo $PROJECT_ROOT
 
@@ -8,5 +8,5 @@ export CUDA_VISIBLE_DEVICES=0
 export VERSION="v1.5"
 
 python main.py \
-    --model-path "$HF_HOME/hub/models--unsloth--Qwen2.5-7B-Instruct/snapshots/a75c9dc945567a9b6f568b8503a0307731607bee" \
-    --adapter-path "$HF_HOME/hub/models--bunbohue--Mazii-MT-13-28-30_06-01-2026/snapshots/1fd6c79ae4932f74876490322622b1e20321510b"
+    --model-path "$HF_HOME/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218" \
+    --adapter-path "$HF_HOME/hub/models--bunbohue--Mazii-MT-10-06-01_07-01-2026/snapshots/556df31f7c87d2c98ba5983d2eb914b168de44c8"
