@@ -1,5 +1,3 @@
-
-
 curl -X POST "http://localhost:8888/v1/translate" \
   -H "Content-Type: application/json" \
   -d '{
