@@ -3,6 +3,7 @@ import argparse
 import logging
 from server import SGLangServer
 from pathlib import Path
+from huggingface_hub import login
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -44,7 +45,7 @@ def main():
     
     server.run()
 
-load_env_file(".env")
+load_env_file(Path(".env"))
 hf_token = os.getenv("HF_TOKEN")
 if not hf_token:
     raise RuntimeError("HF_TOKEN is not set in the environment or .env file.")
