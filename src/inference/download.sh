@@ -5,5 +5,6 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)"
 # HF config
 export HF_HOME="$PROJECT_ROOT/model"
 
-hf download Qwen/Qwen3-8B
-hf download bunbohue/Mazii-MT-10-06-01_07-01-2026
+# hf download Qwen/Qwen3-8B
+hf download Qwen/Qwen3-4B-Thinking-2507
+# hf download bunbohue/Mazii-MT-10-06-01_07-01-2026
