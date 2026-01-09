@@ -126,6 +126,7 @@ class SGLangServer:
             elif message.role == "user":
                 prompt_parts.append(f"<|im_start|>user\n{message.content}<|im_end|>")
         prompt_parts.append("<|im_start|>assistant\n")        # Add assistant start token for generation
+        prompt_parts.append("<think>\n\n</think>\n\n")
         return "\n".join(prompt_parts)
 
 
