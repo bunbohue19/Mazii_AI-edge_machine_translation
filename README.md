@@ -12,7 +12,6 @@ Path: https://drive.google.com/file/d/1T3FDYtUANPtn1qbbVwRLU1fsXi-igVn7/view?usp
 - logs/
 - model/
 - output/
-  - Mazii-MT-13-28-30_06-01-2026/
 - src/
   - inference/
     - base_model/
@@ -29,6 +28,7 @@ Path: https://drive.google.com/file/d/1T3FDYtUANPtn1qbbVwRLU1fsXi-igVn7/view?usp
     - main.sh
     - requirements.sh
     - server.py
+    - .env
   - synthesize-data/
     - ja2xx/
       - translation_runner.py
@@ -58,6 +58,7 @@ Path: https://drive.google.com/file/d/1T3FDYtUANPtn1qbbVwRLU1fsXi-igVn7/view?usp
         - UnslothXPOTrainer.py
       - main.py
       - main.sh
+      - .env
     - requirements.sh
     - requirements.txt
 - README.md
