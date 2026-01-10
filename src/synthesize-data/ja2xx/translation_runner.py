@@ -2,30 +2,32 @@ import json
 import os
 import time
 import openai
+import argparse
 from typing import Optional
 from openai import OpenAI
 from tqdm import tqdm
 from transformers import AutoTokenizer
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 DEFAULT_SYSTEM_PROMPT = (
-    "あなたは日本語の通訳者です。日本語から他の言語へ、または他の言語から日本語へ翻訳してください。"
+    "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
 )
 
 MAX_CONTEXT_LENGTH = 4096
 
-def _require_env(name: str) -> str:
-    """Return the env var or raise a helpful error."""
-    value = os.getenv(name)
-    if not value:
-        raise RuntimeError(f"{name} environment variable is required for the translation job.")
-    return value
-
-
-def _parse_optional_int(value: Optional[str], default_value: Optional[int]) -> Optional[int]:
-    if value is None or value == "":
-        return default_value
-    return int(value)
-
+def load_env_file(env_path: Path) -> None:
+    """Populate os.environ entries from a simple KEY=VALUE .env file."""
+    if not env_path.exists():
+        return
+    for raw_line in env_path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        if key:
+            os.environ.setdefault(key.strip(), value.strip())
 
 def _translate_text(
     client: OpenAI,
@@ -46,7 +48,7 @@ def _translate_text(
                     {"role": "system", "content": system_prompt},
                     {
                         "role": "user",
-                        "content": f"次のセグメントを、追加の説明なしで \"{target_lang_code}\" に翻訳してください。\"{text}\"",
+                        "content": f"Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\"",
                     },
                 ],
             )
@@ -67,45 +69,43 @@ def _translate_text(
                 return None
             time.sleep(rate_limit_backoff)
     return None
-
-
+        
 def run_translation_job(
     *,
-    text_column: str = "formatted",
-    dataset_path: str = "source_data/[JA-JA]_大辞泉_第二版.jsonl",
-    default_model_name: str = "glm-4.5-flash",
+    text_column: str,
+    dataset_path: str,
+    model_name: str,
+    target_lang_code: str, 
+    start_id: str, 
+    end_id: str,
+    output_path: str
 ) -> None:
     """Shared runner used by every language-specific entry point."""
 
     with open(dataset_path, "r", encoding="utf-8") as f:
         data = [json.loads(line) for line in f]
 
-    api_key = _require_env("ZAI_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY")
     base_url = os.getenv("BASE_URL")
     client_kwargs = {"api_key": api_key}
     if base_url:
         client_kwargs["base_url"] = base_url
     client = OpenAI(**client_kwargs)
-
-    target_lang_code = _require_env("TARGET_LANG_CODE")
-    output_fp = _require_env("OUTPUT_FP")
-
-    start_id = _parse_optional_int(os.getenv("START_ID"), 0) or 0
-    end_id = _parse_optional_int(os.getenv("END_ID"), None)
+    start_id = int(start_id)
+    end_id = int(end_id)
     sleep_seconds = float(os.getenv("SLEEP_SECONDS", "1"))
     max_retries = int(os.getenv("MAX_RETRIES", "3"))
     rate_limit_backoff = float(os.getenv("RATE_LIMIT_BACKOFF_SECONDS", "10"))
-    model_name = os.getenv("MODEL_NAME", default_model_name)
     system_prompt = os.getenv("SYSTEM_PROMPT", DEFAULT_SYSTEM_PROMPT)
 
-    tokenizer = AutoTokenizer.from_pretrained("zai-org/GLM-4.5")
+    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B-Base")
 
-    output_dir = os.path.dirname(output_fp)
+    output_dir = os.path.dirname(output_path)
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
     translated = 0
 
-    with open(output_fp, "w", encoding="utf-8") as outfile:
+    with open(output_path, "w", encoding="utf-8") as outfile:
         outfile.write("[\n")
         for idx, sample in enumerate(tqdm(data, desc=f"Translating {dataset_path}")):
             if idx < start_id:
@@ -114,8 +114,9 @@ def run_translation_job(
                 break
 
             text = sample.get(text_column)
-            tokens = tokenizer.encode(text)
-            if not text or len(tokens) >= MAX_CONTEXT_LENGTH:
+
+            tokens = tokenizer.tokenize(text)
+            if len(tokens) >= MAX_CONTEXT_LENGTH:
                 continue
 
             translated_text = _translate_text(
@@ -150,5 +151,25 @@ def run_translation_job(
 
     print(f"Finished translating {translated} samples from {dataset_path}.")
 
+load_env_file(Path(".env"))
+
 if __name__ == "__main__":
-    run_translation_job(dataset_path="[JA-JA]_大辞泉_第二版.jsonl")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--text_column", type=str, default="text")
+    parser.add_argument("--dataset_path", type=str)
+    parser.add_argument("--model_name", type=str, default="gemini-3-flash")
+    parser.add_argument("--target_lang_code", type=str, required=True)
+    parser.add_argument("--start_id", type=int, required=True)
+    parser.add_argument("--end_id", type=int, required=True)
+    parser.add_argument("--output_path", type=str, required=True)
+    args = parser.parse_args()
+        
+    run_translation_job(
+        text_column=args.text_column,
+        dataset_path=args.dataset_path,
+        model_name=args.model_name,
+        target_lang_code=args.target_lang_code,
+        start_id=args.start_id,
+        end_id=args.end_id,
+        output_path=args.output_path
+    )
