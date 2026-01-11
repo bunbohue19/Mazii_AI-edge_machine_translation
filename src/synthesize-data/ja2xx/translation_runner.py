@@ -52,7 +52,34 @@ def _translate_text(
                     },
                 ],
             )
-            return completion.choices[0].message.content
+            if not completion or not completion.choices:
+                print("No completion choices returned; skipping this sample.")
+                return None
+
+            message = completion.choices[0].message
+            if message is None:
+                print("Completion returned no message; skipping this sample.")
+                return None
+
+            content = message.content
+            # Some providers return structured content parts; flatten to a single string.
+            if isinstance(content, list):
+                parts = []
+                for part in content:
+                    text_part = getattr(part, "text", None) or getattr(part, "content", None)
+                    if text_part:
+                        parts.append(text_part)
+                content = "".join(parts).strip() if parts else None
+
+            if not content:
+                refusal = getattr(message, "refusal", None)
+                if refusal:
+                    print(f"Model refused to answer: {refusal}; skipping this sample.")
+                else:
+                    print("Model returned empty content; skipping this sample.")
+                return None
+
+            return content
         except openai.RateLimitError:
             if attempt == max_retries:
                 raise

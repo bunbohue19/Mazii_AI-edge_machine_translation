@@ -5,11 +5,11 @@ DATASET_NAME="[JA-JA]_実用日本語表現辞典"
 
 TEXT_COLUMN="text"
 DATASET_PATH="$PROJECT_ROOT/data/synthetic-data/input/$DATASET_NAME.jsonl"
-MODEL_NAME="gemini-3-flash"
+MODEL_NAME="gemini-3-flash-preview"
 TARGET_LANG_CODE="Indonesian"
-START_ID=0
+START_ID=6401
 END_ID=10000
-OUTPUT_PATH="$PROJECT_ROOT/data/synthetic-data/output/$TIMESTAMP.json"
+OUTPUT_PATH="$PROJECT_ROOT/data/synthetic-data/output/$TIMESTAMP-$TARGET_LANG_CODE.json"
 
 python translation_runner.py \
   --text_column "$TEXT_COLUMN" \
