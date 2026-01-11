@@ -80,7 +80,7 @@ def main_translation_interface():
         
         target_lang = st.selectbox(
             "To:",
-            ["日本語", "ベトナム語", "インドネシア語"],
+            ["Japanese", "Vietnamese", "Traditional Chinese", "Indonesian"],
             index=0,
             key="target_lang"
         )
