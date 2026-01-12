@@ -107,6 +107,7 @@ class SGLangServer:
                 # Generate translation
                 response = await self._generate_translation_response(
                     prompt=prompt,
+                    thinking_budget=request.thinking_budget,
                     max_tokens=request.max_tokens,
                     temperature=request.temperature,
                     target_language=request.target_language_code
@@ -130,12 +131,13 @@ class SGLangServer:
         return "\n".join(prompt_parts)
 
 
-    async def _generate_translation_response(self, prompt: str, max_tokens: int, temperature: float, target_language: str) -> TranslationResponse:
+    async def _generate_translation_response(self, prompt: str, thinking_budget: int, max_tokens: int, temperature: float, target_language: str) -> TranslationResponse:
         """Generate translation response using SGLang"""
         try:
             # Run the SGLang translation function
             state = translation_function.run(
                 prompt=prompt,
+                thinking_budget=thinking_budget,
                 max_tokens=max_tokens,
                 temperature=temperature
             )

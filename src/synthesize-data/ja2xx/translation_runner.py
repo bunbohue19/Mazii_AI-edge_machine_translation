@@ -17,18 +17,6 @@ DEFAULT_SYSTEM_PROMPT = (
 
 MAX_CONTEXT_LENGTH = 4096
 
-def load_env_file(env_path: Path) -> None:
-    """Populate os.environ entries from a simple KEY=VALUE .env file."""
-    if not env_path.exists():
-        return
-    for raw_line in env_path.read_text().splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, _, value = line.partition("=")
-        if key:
-            os.environ.setdefault(key.strip(), value.strip())
-
 def _translate_text(
     client: OpenAI,
     *,
@@ -177,8 +165,6 @@ def run_translation_job(
         outfile.write("\n]\n")
 
     print(f"Finished translating {translated} samples from {dataset_path}.")
-
-load_env_file(Path(".env"))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
