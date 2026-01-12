@@ -2,7 +2,7 @@ import json
 import glob
 from pathlib import Path
 
-def merge_json_files(file_paths, output_file='v1_3.json', mode='array'):
+def merge_json_files(file_paths, output_file='data.json', mode='array'):
     """
     Merge multiple JSON files into one.
     
@@ -83,19 +83,19 @@ def merge_json_files(file_paths, output_file='v1_3.json', mode='array'):
 
 # Example usage:
 if __name__ == '__main__':
-    # Example 1: Merge all JSON files in current directory into an array
-    merge_json_files('/home/ansible/eUp/eUp_NMT/dataset/train/v1.3/*.json', 
-                     output_file='/home/ansible/eUp/eUp_NMT/dataset/train/v1_3.json', 
-                     mode='array'
-                    )
+    # 1: Merge all JSON files in current directory into an array
+    merge_json_files('../../data/synthetic-data/output/*.json', 
+                    output_file='../../data/train/new_data.json', 
+                    mode='object'
+                )
     
-    # Example 2: Merge specific files into one object
+    # 2: Merge specific files into one object
     # merge_json_files(['file1.json', 'file2.json', 'file3.json'], 
     #                  output_file='merged_object.json', 
     #                  mode='object')
     
-    # Example 3: Merge with filenames as keys
+    # 3: Merge with filenames as keys
     # merge_json_files('data/*.json', output_file='merged_named.json', mode='named')
     
-    # Example 4: Merge files from specific directory
+    # 4: Merge files from specific directory
     # merge_json_files('path/to/files/*.json', output_file='output.json', mode='array')
