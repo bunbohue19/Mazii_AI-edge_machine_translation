@@ -50,47 +50,8 @@ def create_conversation(sample):
     }
 
 # Define formatting function for chat template
-# def formatting_func(examples):
-#     """Convert messages to chat template format
-#     This function handles both single examples and batches
-#     """
-#     # Check if we're dealing with a batch or single example
-#     if isinstance(examples["messages"][0], list):
-#         # Batch processing: examples["messages"] is a list of message lists
-#         texts = []
-#         for messages in examples["messages"]:
-#             text = tokenizer.apply_chat_template(
-#                 messages,
-#                 tokenize=False,
-#                 add_generation_prompt=False
-#             )
-#             texts.append(text)
-#         return texts
-#     else:
-#         # Single example: examples["messages"] is a single message list
-#         text = tokenizer.apply_chat_template(
-#             examples["messages"],
-#             tokenize=False,
-#             add_generation_prompt=False
-#         )
-#         return [text]
-
-def format_messages_manual(messages):
-    """Manually format messages into ChatML format without requiring chat template"""
-    formatted_parts = []
-    for msg in messages:
-        role = msg["role"]
-        content = msg["content"]
-        if role == "system":
-            formatted_parts.append(f"<|im_start|>system\n{content}<|im_end|>")
-        elif role == "user":
-            formatted_parts.append(f"<|im_start|>user\n{content}<|im_end|>")
-        elif role == "assistant":
-            formatted_parts.append(f"<|im_start|>assistant\n{content}<|im_end|>")
-    return "\n".join(formatted_parts)
-
 def formatting_func(examples):
-    """Convert messages to formatted text using manual formatting
+    """Convert messages to chat template format
     This function handles both single examples and batches
     """
     # Check if we're dealing with a batch or single example
@@ -98,12 +59,20 @@ def formatting_func(examples):
         # Batch processing: examples["messages"] is a list of message lists
         texts = []
         for messages in examples["messages"]:
-            text = format_messages_manual(messages)
+            text = tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=False
+            )
             texts.append(text)
         return texts
     else:
         # Single example: examples["messages"] is a single message list
-        text = format_messages_manual(examples["messages"])
+        text = tokenizer.apply_chat_template(
+            examples["messages"],
+            tokenize=False,
+            add_generation_prompt=False
+        )
         return [text]
 
 load_env_file(Path(".env"))
