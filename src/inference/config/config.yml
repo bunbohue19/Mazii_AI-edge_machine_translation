@@ -30,7 +30,13 @@ VERSION:
       USER: "以下のセグメントを、追加の説明を一切含めずに \"{target_lang_code}\" に翻訳してください。\"{target_lang_code}\" におけるスタイル、ニュアンス、および実用的な文脈を十分に反映させてください：\"{text}\""
 
   v1.5:
-    MODEL_ID: "unsloth/Qwen3-8B"
+    MODEL_ID: "Qwen/Qwen3-8B-Base"
+    PROMPT: 
+      SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+      USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
+
+  v1.6:
+    MODEL_ID: "Qwen/Qwen3-8B-Base"
     PROMPT: 
       SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
       USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""

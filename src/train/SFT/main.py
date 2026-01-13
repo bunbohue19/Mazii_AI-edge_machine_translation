@@ -117,8 +117,8 @@ if __name__ == "__main__":
         logging_dir=f"{PROJECT_ROOT}/logs",
         logging_steps=1,
         logging_strategy="steps",
-        per_device_train_batch_size=32,
-        per_device_eval_batch_size=32,
+        per_device_train_batch_size=128,
+        per_device_eval_batch_size=128,
         gradient_accumulation_steps=4,
         # ddp_find_unused_parameters=False,  # Distributed training settings
         # ddp_timeout=3600,                  # Distributed training settings. 1 hour timeout for distributed operations
