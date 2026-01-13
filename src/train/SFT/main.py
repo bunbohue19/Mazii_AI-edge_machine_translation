@@ -75,7 +75,7 @@ def formatting_func(examples):
         )
         return [text]
 
-load_env_file(".env")
+load_env_file(Path(".env"))
 hf_token = os.getenv("HF_TOKEN")
 if not hf_token:
     raise RuntimeError("HF_TOKEN is not set in the environment or .env file.")
