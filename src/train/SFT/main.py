@@ -90,8 +90,8 @@ if __name__ == "__main__":
 
     # Define model init arguments
     model_kwargs = dict(
-        attn_implementation="flash_attention_2",              # Use "flash_attention_2" when running on Ampere or newer GPU
-        dtype=torch.bfloat16,                           # What torch dtype to use, defaults to auto
+        attn_implementation="eager",                          # Use "flash_attention_2" when running on Ampere or newer GPU
+        torch_dtype=torch.bfloat16,                           # What torch dtype to use, defaults to auto
         device_map="auto",                                    # Let torch decide how to load the model
     )
 
@@ -100,8 +100,8 @@ if __name__ == "__main__":
     #     load_in_4bit=True,
     #     bnb_4bit_use_double_quant=True,
     #     bnb_4bit_quant_type='nf4',
-    #     bnb_4bit_compute_dtype=model_kwargs['dtype'],
-    #     bnb_4bit_quant_storage=model_kwargs['dtype'],
+    #     bnb_4bit_compute_dtype=model_kwargs['torch_dtype'],
+    #     bnb_4bit_quant_storage=model_kwargs['torch_dtype'],
     # )
 
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs)
