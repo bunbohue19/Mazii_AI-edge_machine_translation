@@ -4,8 +4,7 @@ import torch
 import pandas as pd
 from pathlib import Path
 from datasets import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
-from peft import LoraConfig
+from unsloth import FastLanguageModel
 from datetime import datetime
 from trl import SFTConfig, SFTTrainer
 from huggingface_hub import login
@@ -87,35 +86,28 @@ if __name__ == "__main__":
     dataset = dataset.shuffle()
     dataset = dataset.map(create_conversation, remove_columns=dataset.features, batched=False)
     dataset = dataset.train_test_split(test_size=1e-2 * len(df) / len(df))      # 1% dataset for validation
-
-    # Define model init arguments
-    model_kwargs = dict(
-        attn_implementation="flash_attention_2",              # Use "flash_attention_2" when running on Ampere or newer GPU
-        torch_dtype=torch.bfloat16,                           # What torch dtype to use, defaults to auto
-        device_map="auto",                                    # Let torch decide how to load the model
+    
+    model, tokenizer = FastLanguageModel.from_pretrained(
+        model_name=MODEL_ID,  
+        max_seq_length=MAX_SEQ_LENGTH,
+        dtype=DTYPE,
+        load_in_4bit=LOAD_IN_4BIT,
+        device_map="auto"
     )
 
-    # # BitsAndBytesConfig: Enables 4-bit quantization to reduce model size/memory usage
-    # model_kwargs["quantization_config"] = BitsAndBytesConfig(
-    #     load_in_4bit=True,
-    #     bnb_4bit_use_double_quant=True,
-    #     bnb_4bit_quant_type='nf4',
-    #     bnb_4bit_compute_dtype=model_kwargs['torch_dtype'],
-    #     bnb_4bit_quant_storage=model_kwargs['torch_dtype'],
-    # )
-
-    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs)
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-
-    peft_config = LoraConfig(
+    model = FastLanguageModel.get_peft_model(
+        model,
+        r=16,  # LoRA rank
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
         lora_alpha=16,
-        lora_dropout=0.05,
-        r=16,
-        bias="none",
-        target_modules="all-linear",
-        task_type="CAUSAL_LM",
-        modules_to_save=["lm_head", "embed_tokens"] # make sure to save the lm_head and embed_tokens as you train the special tokens
+        lora_dropout=0,  # Supports any, but = 0 is optimized
+        bias="none",     # Supports any, but = "none" is optimized
+        use_gradient_checkpointing="unsloth",  # True or "unsloth" for very long context
+        random_state=3407,
+        use_rslora=False,
+        loftq_config=None,
     )
+
 
     # Training arguments
     training_args = SFTConfig(
@@ -161,7 +153,6 @@ if __name__ == "__main__":
         eval_dataset=dataset["test"],
         args=training_args,
         formatting_func=formatting_func,
-        peft_config=peft_config,
         data_collator=None,    # Default collator will be used
     )
     
