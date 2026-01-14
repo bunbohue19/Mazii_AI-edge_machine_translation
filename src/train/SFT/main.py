@@ -124,12 +124,12 @@ if __name__ == "__main__":
         logging_dir=f"{PROJECT_ROOT}/logs",
         logging_steps=1,
         logging_strategy="steps",
-        per_device_train_batch_size=32,
-        per_device_eval_batch_size=32,
+        per_device_train_batch_size=64,
+        per_device_eval_batch_size=64,
         gradient_accumulation_steps=1,
         # ddp_find_unused_parameters=False,  # Distributed training settings
         # ddp_timeout=3600,                  # Distributed training settings. 1 hour timeout for distributed operations
-        num_train_epochs=2,
+        num_train_epochs=3,
         max_steps=-1,                      # -1 means train for full epochs
         learning_rate=1e-5,
         lr_scheduler_type="cosine",
