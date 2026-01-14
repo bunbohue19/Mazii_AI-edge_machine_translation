@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
     peft_config = LoraConfig(
         lora_alpha=16,
-        lora_dropout=0.05,
+        lora_dropout=0,
         r=16,
         bias="none",
         target_modules="all-linear",
