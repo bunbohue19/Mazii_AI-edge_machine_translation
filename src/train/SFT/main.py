@@ -13,7 +13,7 @@ from huggingface_hub import login
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 SYSTEM_PROMPT = "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
-USER_PROMPT = "Please translate the following segment into {target_lang_code} without any additional explanation: \"{text}\".\n Follow these steps in the translation process (Chain of Thought):\n\n 1. Context & Tone Analysis: Identify the text genre (news, literature, technical, etc.), target audience, and tone (formal, informal, ironic, etc.).\n\n 2. Extracting Entities & Terminology: List proper names, place names, organizations, or technical terms present in the text. Ensure you look them up or correctly identify their meanings within this specific context.\n\n 3. Disambiguation: Check for words with multiple meanings that could easily cause confusion (e.g., words indicating location or state). Determine the correct meaning based on surrounding words.\n\n 4. Literary Translation: Translate each sentence literally to ensure no information is missed.\n\n 5. Proofreading & Final Polish: Adjust the draft to sound smooth and natural, like a {target_lang_code} native speaker, while ensuring grammatical accuracy and style as defined in Step 1.\n\n Final Result: Present the finalized translation only after completing the above steps."
+USER_PROMPT = "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
 MAX_SEQ_LENGTH = 4096
 DTYPE = torch.bfloat16
 LOAD_IN_4BIT = False
