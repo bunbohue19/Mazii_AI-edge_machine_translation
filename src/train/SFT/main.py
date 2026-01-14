@@ -135,7 +135,7 @@ if __name__ == "__main__":
         lr_scheduler_type="cosine",
         warmup_steps=10,
         weight_decay=0.01,
-        optim="adamw_torch_fused",         
+        optim="paged_adamw_8bit",         
         max_grad_norm=0.3,
         gradient_checkpointing=True,
         eval_strategy="steps",
