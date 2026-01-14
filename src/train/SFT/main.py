@@ -92,7 +92,7 @@ if __name__ == "__main__":
     model_kwargs = dict(
         attn_implementation="eager",                          # Use "flash_attention_2" when running on Ampere or newer GPU
         dtype=torch.bfloat16,                           # What torch dtype to use, defaults to auto
-        device_map="auto",                                    # Let torch decide how to load the model
+        device_map="auto",                              # Let torch decide how to load the model
     )
 
     # # BitsAndBytesConfig: Enables 4-bit quantization to reduce model size/memory usage
@@ -146,7 +146,7 @@ if __name__ == "__main__":
         metric_for_best_model="eval_loss",
         bf16=True,                        
         fp16=False,                        
-        max_seq_length=MAX_SEQ_LENGTH,
+        max_length=MAX_SEQ_LENGTH,
         dataset_text_field="text",         # Will be handled by formatting function
         packing=False,                     # Don't pack multiple samples together for translation
         seed=3407,
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     # SFT Trainer with chat template formatting
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         train_dataset=dataset["train"],
         eval_dataset=dataset["test"],
         args=training_args,
