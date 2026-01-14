@@ -61,7 +61,7 @@ class SGLangServer:
                     "tokenizer_path": self.model_path,
                     "tp_size": 1,  # Adjust based on GPU setup
                     "mem_fraction_static": 0.80,  # Adjust based on available VRAM
-                    "context_length": 2048,  # Adjust based on model capabilities
+                    "context_length": 8192,  # Adjust based on model capabilities
                 }
                 
                 # Add adapter configuration if provided
@@ -127,7 +127,7 @@ class SGLangServer:
             elif message.role == "user":
                 prompt_parts.append(f"<|im_start|>user\n{message.content}<|im_end|>")
         prompt_parts.append("<|im_start|>assistant\n")        # Add assistant start token for generation
-        prompt_parts.append("<think>\n\n</think>\n\n")
+        # prompt_parts.append("<think>\n\n</think>\n\n")
         return "\n".join(prompt_parts)
 
 

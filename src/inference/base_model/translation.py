@@ -9,7 +9,7 @@ class TranslationRequest(BaseModel):
     target_language_code: str
     max_tokens: Optional[int] = 1024
     temperature: Optional[float] = 0.20  # Lower temperature for translation tasks
-
+    thinking_budget: Optional[int] = 128
 
 class TranslationResponse(BaseModel):
     translated_text: str
@@ -18,9 +18,8 @@ class TranslationResponse(BaseModel):
     
 
 @sgl.function
-def translation_function(s, prompt: str, thinking_budget: int = 256, max_tokens: int = 1024, temperature: float = 0.20):
+def translation_function(s, prompt: str, thinking_budget: int = 128, max_tokens: int = 1024, temperature: float = 0.20):
     """SGLang function optimized for translation tasks"""
-    s += prompt
     # First stage: generate thinking content
     s += prompt
     s += sgl.gen("thinking", max_tokens=thinking_budget, stop=["</think>"])
@@ -29,7 +28,7 @@ def translation_function(s, prompt: str, thinking_budget: int = 256, max_tokens:
     thinking_text = s["thinking"]
     if "</think>" not in thinking_text:
         # Force close thinking
-        s += "\n\nConsidering the limited time, I'll provide the solution now.\n</think>\n\n"
+        s += "\n\nConsidering the limited time, I'll provide the translation now.\n</think>\n\n"
     
     # Second stage: generate actual translation
     s += sgl.gen("translation", max_tokens=max_tokens, temperature=temperature, stop=["<|im_end|>"])

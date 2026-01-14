@@ -1,7 +1,8 @@
 curl -X POST "http://localhost:8888/v1/translate" \
   -H "Content-Type: application/json" \
   -d '{
-    "text": "まずはイタリアの計画について説明しましょう。イタリアは主にドイツと日本の「弟分」でした。",
-    "target_language_code": "Vietnamese",
-    "temperature": 0.20
+    "text": "11時29分頃、デモ隊は英国政府に向かい、トラファルガー広場を通り過ぎて、ストランド街沿いにアルドウィックのそばを通り抜け、キングスウェイをホルボーンに向かって進みましたが、そこでは保守党がグランドコンノートルームズホテルで春季フォーラムを開催していました。",
+    "thinking_budget": 1024,
+    "temperature": 0.70,
+    "target_language_code": "Vietnamese"
   }'
