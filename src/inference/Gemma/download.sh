@@ -9,6 +9,7 @@ export HF_HOME="$PROJECT_ROOT/model"
 # hf download Qwen/Qwen3-8B
 # hf download Qwen/Qwen3-4B
 # hf download Aratako/Qwen3-8B-NSFW-JP
+hf download google/gemma-3-4b-it
 
 # Adapter
 # hf download bunbohue/Mazii-MT-09-38-43_13-01-2026

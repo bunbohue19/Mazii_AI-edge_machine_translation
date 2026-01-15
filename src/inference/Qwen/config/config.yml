@@ -1,0 +1,56 @@
+VERSION: 
+  v1.0:
+    MODEL_ID: "Qwen/Qwen3-4B-Instruct-2507"
+    PROMPT:
+      SYSTEM: あなたは日本語の翻訳者です。常に正確で自然かつ文化的に適切な翻訳を、日本語と他の言語の間で提供してください。日本語から他の言語に翻訳する際は、ニュアンス（カジュアル、丁寧、敬語）を的確に表現してください。
+      USER: "{source_language_code} から {target_language_code} へ翻訳してください: {text}"
+  
+  v1.1:
+    MODEL_ID: "Qwen/Qwen3-4B-Instruct-2507"
+    PROMPT: 
+      SYSTEM: "あなたは日本語の通訳者です。日本語から他の言語へ、または他の言語から日本語へ翻訳してください。"
+      USER: "次のセグメントを、追加の説明なしで {targetLanguageCode} に翻訳してください。{text}"
+
+  v1.2:
+    MODEL_ID: "Qwen/Qwen3-4B-Instruct-2507"
+    PROMPT: 
+      SYSTEM: "あなたは日本語の通訳者です。日本語から他の言語へ、または他の言語から日本語へ翻訳してください。"
+      USER: "次のセグメントを、追加の説明なしで {targetLanguageCode} に翻訳してください。\"{text}\""
+  
+  v1.3:
+    MODEL_ID: "unsloth/Qwen2.5-7B-Instruct-bnb-4bit"
+    PROMPT: 
+      SYSTEM: "あなたは日本語の通訳者です。日本語から他の言語へ、または他の言語から日本語へ翻訳してください。"
+      USER: "以下のセグメントを、追加の説明を一切含めずに \"{target_lang_code}\" に翻訳してください。\"{target_lang_code}\" におけるスタイル、ニュアンス、および実用的な文脈を十分に反映させてください：\"{text}\""
+
+  v1.4:
+    MODEL_ID: "unsloth/Qwen2.5-7B-Instruct"
+    PROMPT: 
+      SYSTEM: "あなたは日本語の通訳者です。日本語から他の言語へ、または他の言語から日本語へ翻訳してください。"
+      USER: "以下のセグメントを、追加の説明を一切含めずに \"{target_lang_code}\" に翻訳してください。\"{target_lang_code}\" におけるスタイル、ニュアンス、および実用的な文脈を十分に反映させてください：\"{text}\""
+
+  v1.5:
+    MODEL_ID: "Qwen/Qwen3-8B"
+    PROMPT: 
+      SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+      USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
+
+  v1.6:
+    MODEL_ID: "Qwen/Qwen3-8B"
+    PROMPT: 
+      SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+      USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
+  
+  v1.7:
+    MODEL_ID: "Aratako/Qwen3-8B-NSFW-JP"
+    PROMPT:
+    PROMPT: 
+      SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+      USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
+
+  v1.8:
+      MODEL_ID: "google/gemma-3-4b-it"
+      PROMPT:
+      PROMPT: 
+        SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+        USER: "Please translate the following segment into {target_lang_code} without any additional explanation: \"{text}\""

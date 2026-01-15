@@ -47,3 +47,10 @@ VERSION:
     PROMPT: 
       SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
       USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
+
+  v1.8:
+      MODEL_ID: "google/gemma-3-4b-it"
+      PROMPT:
+      PROMPT: 
+        SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+        USER: "Please translate the following segment into {target_lang_code} without any additional explanation: \"{text}\""
