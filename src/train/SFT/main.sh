@@ -1,5 +1,5 @@
 export CUDA_VISIBLE_DEVICES=0
-export MODEL_ID="google/gemma-3-4b-it"
+export MODEL_ID="unsloth/gemma-3-4b-it"
 export DATASET_NAME="2026-01-13_07-25-54"
 
 # python main.py
