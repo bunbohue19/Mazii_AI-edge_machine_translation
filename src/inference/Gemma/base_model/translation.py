@@ -8,7 +8,7 @@ class TranslationRequest(BaseModel):
     text: str
     target_language_code: str
     max_tokens: Optional[int] = 1024
-    temperature: Optional[float] = 0.20  # Lower temperature for translation tasks
+    temperature: Optional[float] = 0.10  # Lower temperature for translation tasks
 
 class TranslationResponse(BaseModel):
     translated_text: str
@@ -17,7 +17,7 @@ class TranslationResponse(BaseModel):
     
 
 @sgl.function
-def translation_function(s, prompt: str, max_tokens: int = 1024, temperature: float = 0.20):
+def translation_function(s, prompt: str, max_tokens: int = 1024, temperature: float = 0.10):
     """SGLang function optimized for translation tasks"""
     s += prompt
     s += gen("translation", 

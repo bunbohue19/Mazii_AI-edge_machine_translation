@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import os
 import csv
 import json
 
@@ -29,4 +30,10 @@ def convert_jsonl_to_csv(jsonl_path: str, csv_path: str) -> None:
 
 
 if __name__ == "__main__":
-    convert_jsonl_to_csv("data/result_vi_ja.jsonl", "data/result_vi_ja.csv")
+    os.makedirs("/workspace/Mazii_AI-edge_machine_translation/data/test/output/csv", exist_ok=True)
+    
+    convert_jsonl_to_csv("/workspace/Mazii_AI-edge_machine_translation/data/test/output/jsonl/result_ja_vi.jsonl", 
+                         "/workspace/Mazii_AI-edge_machine_translation/data/test/output/csv/result_ja_vi.csv")
+
+    convert_jsonl_to_csv("/workspace/Mazii_AI-edge_machine_translation/data/test/output/jsonl/result_vi_ja.jsonl", 
+                         "/workspace/Mazii_AI-edge_machine_translation/data/test/output/csv/result_vi_ja.csv")
