@@ -1,0 +1,219 @@
+(venv) root@C.29995546:/workspace/Mazii_AI-edge_machine_translation/src/train/SFT$ nvidia-smi
+Wed Jan 14 19:08:32 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5090        On  |   00000000:41:00.0 Off |                  N/A |
+| 30%   42C    P8             17W /  575W |       2MiB /  32607MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+(venv) root@C.29995546:/workspace/Mazii_AI-edge_machine_translation/src/train/SFT$ ./main.sh
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+Map: 100%|███████████████████████████████████████████████████████████████████| 125143/125143 [00:10<00:00, 11992.97 examples/s]
+==((====))==  Unsloth 2026.1.2: Fast Gemma3 patching. Transformers: 4.57.3.
+   \\   /|    NVIDIA GeForce RTX 5090. Num GPUs = 1. Max memory: 31.357 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.9.1+cu130. CUDA: 12.0. CUDA Toolkit: 13.0. Triton: 3.5.1
+\        /    Bfloat16 = TRUE. FA [Xformers = 0.0.33.post2. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Unsloth: Gemma3 does not support SDPA - switching to fast eager.
+Unsloth: QLoRA and full finetuning all not selected. Switching to 16bit LoRA.
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.43it/s]
+Unsloth: Making `base_model.model.model.vision_tower.vision_model` require gradients
+Unsloth: We found double BOS tokens - we shall remove one automatically.
+Unsloth: Tokenizing ["text"] (num_proc=64): 100%|██████████████████████████████| 123891/123891 [02:07<00:00, 970.89 examples/s]
+Unsloth: We found double BOS tokens - we shall remove one automatically.
+Unsloth: Tokenizing ["text"] (num_proc=64): 100%|███████████████████████████████████| 1252/1252 [02:03<00:00, 10.13 examples/s]
+The model is already on multiple devices. Skipping the move to device specified in `args`.
+==((====))==  Unsloth - 2x faster free finetuning | Num GPUs used = 1
+   \\   /|    Num examples = 123,891 | Num Epochs = 2 | Total steps = 61,946
+O^O/ \_/ \    Batch size per device = 4 | Gradient accumulation steps = 1
+\        /    Data Parallel GPUs = 1 | Total batch size (4 x 1 x 1) = 4
+ "-____-"     Trainable parameters = 32,788,480 of 4,332,867,952 (0.76% trained)
+  0%|                                                                                                | 0/61946 [00:00<?, ?it/s]
+Unsloth: Will smartly offload gradients to save VRAM!
+{'loss': 3.0408, 'grad_norm': 1.438456654548645, 'learning_rate': 9.999949051345195e-06, 'epoch': 0.0}
+{'loss': 1.6512, 'grad_norm': 1.0178500413894653, 'learning_rate': 9.999770240367286e-06, 'epoch': 0.01}
+{'loss': 1.4678, 'grad_norm': 1.3656772375106812, 'learning_rate': 9.999462793381529e-06, 'epoch': 0.01}
+{'loss': 1.3553, 'grad_norm': 0.8339848518371582, 'learning_rate': 9.999026718298039e-06, 'epoch': 0.01}
+{'loss': 1.3156, 'grad_norm': 1.5587263107299805, 'learning_rate': 9.998462026336325e-06, 'epoch': 0.02}
+{'loss': 1.2688, 'grad_norm': 1.3222686052322388, 'learning_rate': 9.997768732024996e-06, 'epoch': 0.02}
+{'loss': 1.2606, 'grad_norm': 1.8219962120056152, 'learning_rate': 9.996946853201393e-06, 'epoch': 0.02}
+{'loss': 1.2429, 'grad_norm': 1.6703029870986938, 'learning_rate': 9.995996411011135e-06, 'epoch': 0.03}
+{'loss': 1.1961, 'grad_norm': 1.8493072986602783, 'learning_rate': 9.99491742990756e-06, 'epoch': 0.03}
+{'loss': 1.2666, 'grad_norm': 1.6411898136138916, 'learning_rate': 9.993709937651109e-06, 'epoch': 0.03}
+  2%|█▎                                                                                | 1000/61946 [15:26<20:37:59,  1.22s/itT
+raceback (most recent call last):                                                             | 10/313 [00:02<01:04,  4.71it/s]
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/unsloth_main.py", line 160, in <module>
+    trainer.train()
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/unsloth_compiled_cache/UnslothSFTTrainer.py", line 63, in wr
+apper
+    output = f(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/transformers/trainer.py",
+line 2325, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 410, in _fast_inner_training_loop
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/transformers/trainer.py",
+line 3221, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/transformers/trainer.py",
+line 3170, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/transformers/trainer.py",
+line 4489, in evaluate
+    output = eval_loop(
+             ^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/transformers/trainer.py",
+line 4685, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py
+", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/unsloth/models/rl.py", lin
+e 176, in unsloth_prediction_step
+    loss, outputs = self.compute_loss(
+                    ^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/unsloth_compiled_cache/UnslothSFTTrainer.py", line 1102, in
+compute_loss
+    outputs = super().compute_loss(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/unsloth/models/_utils.py",
+ line 1643, in _unsloth_pre_compute_loss
+    outputs = self._old_compute_loss(model, inputs, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 36, in compute_loss
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/nn/modules/module.py
+", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/nn/modules/module.py
+", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/accelerate/utils/operation
+s.py", line 819, in forward
+    return model_forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/accelerate/utils/operation
+s.py", line 807, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/amp/autocast_mode.py
+", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/peft/peft_model.py", line
+1923, in forward
+    return self.base_model(
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/nn/modules/module.py
+", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/nn/modules/module.py
+", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.p
+y", line 311, in forward
+    return self.model.forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/unsloth_compiled_cache/unsloth_compiled_module_gemma3.py", l
+ine 902, in forward
+    return Gemma3ForConditionalGeneration_forward(self, input_ids, pixel_values, attention_mask, position_ids, past_key_values,
+ token_type_ids, cache_position, inputs_embeds, labels, use_cache, output_attentions, output_hidden_states, return_dict, logits
+_to_keep, **lm_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_dynamo/external_uti
+ls.py", line 196, in nonrecursive_disable_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/unsloth_compiled_cache/unsloth_compiled_module_gemma3.py", l
+ine 806, in Gemma3ForConditionalGeneration_forward
+    loss = unsloth_fused_ce_loss(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/unsloth_zoo/fused_losses/c
+ross_entropy_loss.py", line 376, in unsloth_fused_ce_loss
+    return apply_autograd_function(UnslothFusedLoss, dict(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/unsloth_zoo/fused_losses/c
+ross_entropy_loss.py", line 46, in apply_autograd_function
+    return getattr(autograd, "apply")(*(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/autograd/function.py
+", line 581, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/unsloth_zoo/fused_losses/c
+ross_entropy_loss.py", line 314, in forward
+    accumulate_chunk(
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.p
+y", line 832, in compile_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/unsloth_zoo/fused_losses/c
+ross_entropy_loss.py", line 217, in accumulate_chunk
+    def accumulate_chunk(
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.p
+y", line 1044, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_functorch/aot_autog
+rad.py", line 1130, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_functorch/_aot_auto
+grad/runtime_wrappers.py", line 353, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_functorch/_aot_auto
+grad/utils.py", line 129, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_functorch/_aot_auto
+grad/runtime_wrappers.py", line 724, in inner_fn
+    outs = compiled_fn(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_functorch/_aot_auto
+grad/runtime_wrappers.py", line 526, in wrapper
+    return compiled_fn(runtime_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_inductor/output_cod
+e.py", line 613, in __call__
+    return self.current_callable(inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Mazii_AI-edge_machine_translation/src/train/SFT/venv/lib/python3.12/site-packages/torch/_inductor/utils.py",
+ line 3017, in run
+    out = model(new_inputs)
+          ^^^^^^^^^^^^^^^^^
+  File "/tmp/torchinductor_root/w6/cw6t276ldplvvqh2himyac25md4xkz36spp6ot2pvvmfiq54iyio.py", line 417, in call
+    buf4 = empty_strided_cuda((s40, 262208), (262208, 1), torch.bfloat16)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 8.25 GiB. GPU 0 has a total capacity of 31.36 GiB of which 5.55 G
+iB is free. Including non-PyTorch memory, this process has 25.78 GiB memory in use. Of the allocated memory 24.94 GiB is alloca
+ted by PyTorch, and 190.86 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pyt
+orch.org/docs/stable/notes/cuda.html#environment-variables)
+(venv) root@C.29995546:/workspace/Mazii_AI-edge_machine_translation/src/train/SFT$ tmux capture-pane -pS - > session.txt
+

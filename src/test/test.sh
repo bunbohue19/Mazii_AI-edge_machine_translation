@@ -1,8 +1,8 @@
 curl -X POST "http://localhost:8888/v1/translate" \
   -H "Content-Type: application/json" \
   -d '{
-    "text": "11時29分頃、デモ隊は英国政府に向かい、トラファルガー広場を通り過ぎて、ストランド街沿いにアルドウィックのそばを通り抜け、キングスウェイをホルボーンに向かって進みましたが、そこでは保守党がグランドコンノートルームズホテルで春季フォーラムを開催していました。",
-    "thinking_budget": 1024,
-    "temperature": 0.70,
-    "target_language_code": "Vietnamese"
+    "text": "Người được ủy quyền nộp tiền bảo lãnh, nếu được chấp thuận, và hợp thức hóa các khoản phí được cảnh sát thực hiện bắt giữ đệ trình lên. Các khoản phí này sau đó được nhập vào hệ thống máy tính của bang nơi vụ án được theo dõi.",
+    "thinking_budget": 128,
+    "temperature": 0.20,
+    "target_language_code": "Japanese"
   }'
