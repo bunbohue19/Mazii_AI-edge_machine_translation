@@ -6,7 +6,7 @@ from sglang import gen
 
 class TranslationRequest(BaseModel):
     text: str
-    target_language_code: str
+    target_lang_code: str
     max_tokens: Optional[int] = 1024
     temperature: Optional[float] = 0.20  # Lower temperature for translation tasks
     thinking_budget: Optional[int] = 128

@@ -91,7 +91,7 @@ class SGLangServer:
             try:
                 # Create the user prompt with template
                 user_prompt = self.user_prompt.format(
-                    target_lang_code=request.target_language_code,
+                    target_lang_code=request.target_lang_code,
                     text=request.text
                 )
                 
@@ -109,7 +109,7 @@ class SGLangServer:
                     prompt=prompt,
                     max_tokens=request.max_tokens,
                     temperature=request.temperature,
-                    target_language=request.target_language_code
+                    target_language=request.target_lang_code
                 )
                 
                 return response

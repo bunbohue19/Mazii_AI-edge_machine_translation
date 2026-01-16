@@ -26,7 +26,7 @@ class SGLangServer:
         self.model_path = model_path
         self.adapter_path = adapter_path
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "zai-org/GLM-4-9B-0414",
+            "THUDM/GLM-4-9B-0414",
             trust_remote_code=True
         )
         self.system_prompt = config["PROMPT"]["SYSTEM"]
@@ -66,7 +66,7 @@ class SGLangServer:
                     "tokenizer_path": self.model_path,
                     "tp_size": 1,  # Adjust based on GPU setup
                     "mem_fraction_static": 0.80,  # Adjust based on available VRAM
-                    "context_length": 8192  # Adjust based on model capabilities
+                    "context_length": 8192,  # Adjust based on model capabilities
                 }
                 
                 # Add adapter configuration if provided

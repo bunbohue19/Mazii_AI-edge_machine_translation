@@ -20,7 +20,7 @@ class TranslationClient:
                 f"{self.base_url}/v1/translate",
                 json={
                     "text": text,
-                    "target_language_code": target_lang,
+                    "target_lang_code": target_lang,
                     "temperature": temperature,
                     "max_tokens": max_tokens
                 },

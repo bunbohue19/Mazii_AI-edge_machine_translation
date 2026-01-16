@@ -44,13 +44,23 @@ VERSION:
   v1.7:
     MODEL_ID: "Aratako/Qwen3-8B-NSFW-JP"
     PROMPT:
-    PROMPT: 
       SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
       USER: "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
 
   v1.8:
       MODEL_ID: "google/gemma-3-4b-it"
-      PROMPT:
       PROMPT: 
         SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
         USER: "Please translate the following segment into {target_lang_code} without any additional explanation: \"{text}\""
+
+  v1.9:
+      MODEL_ID: "zai-org/GLM-4-9B-0414"
+      PROMPT: 
+        SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
+        USER: "Please translate the following segment into {target_lang_code} without any additional explanation: \"{text}\""
+
+  v1.10:
+      MODEL_ID: "tencent/HY-MT1.5-1.8B"
+      PROMPT:
+        SYSTEM: ""
+        USER: "Translate the following segment into {target_lang_code}, without additional explanation.\n\n{text}"

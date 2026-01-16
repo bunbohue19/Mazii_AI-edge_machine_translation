@@ -28,7 +28,7 @@ class Client:
             ) as response:
                 return await response.json()
     
-    async def translate(self, text: str, target_language_code: str, **kwargs):
+    async def translate(self, text: str, target_lang_code: str, **kwargs):
         """Send translation request"""
         import aiohttp
         
@@ -37,7 +37,7 @@ class Client:
                 f"{self.base_url}/v1/translate",
                 json={
                     "text": text,
-                    "target_language_code": target_language_code,
+                    "target_lang_code": target_lang_code,
                     **kwargs
                 }
             ) as response:
