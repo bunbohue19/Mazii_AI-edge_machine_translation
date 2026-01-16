@@ -182,40 +182,40 @@ class SGLangServer:
         logger.info(f"Starting SGLang server on {self.host}:{self.port}")
         uvicorn.run(self.app, host=self.host, port=self.port)
 
-# if __name__ == "__main__":
-#     tokenizer = AutoTokenizer.from_pretrained(
-#         "google/translategemma-4b-it",
-#         trust_remote_code=True
-#     )
+if __name__ == "__main__":
+    tokenizer = AutoTokenizer.from_pretrained(
+        "google/translategemma-4b-it",
+        trust_remote_code=True
+    )
     
-#     user_prompt = "{text}"
+    user_prompt = "{text}"
     
-#     user_prompt = user_prompt.format(
-#         text="11時29分頃、デモ隊は英国政府に向かい、トラファルガー広場を通り過ぎて、ストランド街沿いにアルドウィックのそばを通り抜け、キングスウェイをホルボーンに向かって進みましたが、そこでは保守党がグランドコンノートルームズホテルで春季フォーラムを開催していました。"
-#     )
+    user_prompt = user_prompt.format(
+        text="11時29分頃、デモ隊は英国政府に向かい、トラファルガー広場を通り過ぎて、ストランド街沿いにアルドウィックのそばを通り抜け、キングスウェイをホルボーンに向かって進みましたが、そこでは保守党がグランドコンノートルームズホテルで春季フォーラムを開催していました。"
+    )
     
-#     messages = [
-#         ChatMessage(role="user", content=user_prompt)
-#     ]
-#     formatted_messages = [
-#         {
-#             "role": msg.role, 
-#             "content": [
-#                 {
-#                     "type": "text",
-#                     "source_lang_code": "ja",
-#                     "target_lang_code": "vi",
-#                     "text": msg.content
-#                 }
-#             ]}
-#         for msg in messages
-#     ]
+    messages = [
+        ChatMessage(role="user", content=user_prompt)
+    ]
+    formatted_messages = [
+        {
+            "role": msg.role, 
+            "content": [
+                {
+                    "type": "text",
+                    "source_lang_code": "ja",
+                    "target_lang_code": "vi",
+                    "text": msg.content
+                }
+            ]}
+        for msg in messages
+    ]
         
-#     print(tokenizer.apply_chat_template(
-#             formatted_messages,
-#             tokenize=False,
-#             add_generation_prompt=True
-#         )
-#     )
+    print(tokenizer.apply_chat_template(
+            formatted_messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+    )
     
     

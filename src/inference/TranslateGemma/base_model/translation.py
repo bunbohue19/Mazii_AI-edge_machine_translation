@@ -26,5 +26,5 @@ def translation_function(s, prompt: str, max_tokens: int = 1024, temperature: fl
             temperature=temperature,  
             top_p=0.95,
             top_k=20,
-            stop=["<eos>"]
+            stop=["<end_of_turn>"]
         )
