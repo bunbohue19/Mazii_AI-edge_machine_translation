@@ -8,10 +8,10 @@ os.makedirs("/workspace/Mazii_AI-edge_machine_translation/data/test/output/jsonl
 
 # Cấu hình
 API_URL = "http://localhost:8888/v1/translate"
-INPUT_FILE = "/workspace/Mazii_AI-edge_machine_translation/data/test/input/ja_vi.jsonl"
-OUTPUT_FILE = "/workspace/Mazii_AI-edge_machine_translation/data/test/output/jsonl/result_ja_vi.jsonl"
-SOURCE_LANG_CODE = "ja"
-TARGET_LANG_CODE = "vi"
+INPUT_FILE = "/workspace/Mazii_AI-edge_machine_translation/data/test/input/vi_ja.jsonl"
+OUTPUT_FILE = "/workspace/Mazii_AI-edge_machine_translation/data/test/output/jsonl/result_vi_ja.jsonl"
+SOURCE_LANG_CODE = "vi"
+TARGET_LANG_CODE = "ja"
 
 def run_translation():
     # 1. Kiểm tra tiến độ đã hoàn thành (Resume logic)

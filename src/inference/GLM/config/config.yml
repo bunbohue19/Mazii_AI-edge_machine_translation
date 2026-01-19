@@ -58,3 +58,9 @@ VERSION:
       PROMPT: 
         SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
         USER: "Translate the following segment into {target_lang_code} without any additional explanation: \"{text}\""
+  
+  v1.10:
+      MODEL_ID: "bunbohue/GLM-4-9B-0414-FP8"
+      PROMPT:
+        SYSTEM: "You are a Japanese translator."
+        USER: "First, translate the following segment into English: \"{text}\"\n. Second, base on the translated English text, translate to {target_lang_code} without any additional explanation:"

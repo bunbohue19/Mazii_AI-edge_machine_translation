@@ -18,7 +18,7 @@ export HF_HOME="$PROJECT_ROOT/model"
 # hf download Aratako/Qwen3-8B-NSFW-JP
 # hf download google/gemma-3-4b-it
 # hf download zai-org/GLM-4-9B-0414
-hf download unsloth/GLM-4-9B-0414-bnb-4bit
+# hf download unsloth/GLM-4-9B-0414-bnb-4bit
 
 # Adapter
 # hf download bunbohue/Mazii-MT-09-38-43_13-01-2026

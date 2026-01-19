@@ -36,7 +36,6 @@ class SGLangServer:
         self.app = FastAPI(title="SGLang Server with Adapter", version="1.0.0")
         self._setup_routes()
         self._validate_paths()
-        print(self.user_prompt)
         
     def _validate_paths(self):
         """Validate model and adapter paths"""
@@ -66,7 +65,8 @@ class SGLangServer:
                     "tokenizer_path": self.model_path,
                     "tp_size": 1,  # Adjust based on GPU setup
                     "mem_fraction_static": 0.80,  # Adjust based on available VRAM
-                    "context_length": 8192  # Adjust based on model capabilities
+                    "context_length": 8192,  # Adjust based on model capabilities
+                    "quantization": "fp8"
                 }
                 
                 # Add adapter configuration if provided

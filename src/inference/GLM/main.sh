@@ -1,5 +1,4 @@
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../" && pwd)"
-echo $PROJECT_ROOT
 
 # HF config
 export HF_HOME="$PROJECT_ROOT/model"
