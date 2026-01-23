@@ -26,7 +26,7 @@ class SGLangServer:
         self.model_path = model_path
         self.adapter_path = adapter_path
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "THUDM/GLM-4-9B-0414",
+            "tencent/HY-MT1.5-1.8B",
             trust_remote_code=True
         )
         self.system_prompt = config["PROMPT"]["SYSTEM"]
