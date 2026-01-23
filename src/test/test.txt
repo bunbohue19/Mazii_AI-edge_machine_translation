@@ -1,2 +1,2 @@
 You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese. 
-Please translate the following segment into Vietnamese without any additional explanation: \"二筋の光が一晩中空に向かうように配備されています。\"
+Please translate the following segment into Vietnamese without any additional explanation: \"謝長廷は、馬英九について実物よりも写真写りが良いと主張していました。\"

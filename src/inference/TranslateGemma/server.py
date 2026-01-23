@@ -60,8 +60,9 @@ class SGLangServer:
                     "model_path": self.model_path,
                     "tokenizer_path": self.model_path,
                     "tp_size": 1,  # Adjust based on GPU setup
-                    "mem_fraction_static": 0.80,  # Adjust based on available VRAM
-                    "context_length": 8192  # Adjust based on model capabilities
+                    "mem_fraction_static": 0.90,  # Adjust based on available VRAM
+                    "context_length": 8192,  # Adjust based on model capabilities
+                    "disable_radix_cache": True
                 }
                 
                 # Add adapter configuration if provided

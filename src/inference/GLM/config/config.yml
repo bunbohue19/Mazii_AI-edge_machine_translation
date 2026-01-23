@@ -57,10 +57,10 @@ VERSION:
       MODEL_ID: "zai-org/GLM-4-9B-0414"
       PROMPT: 
         SYSTEM: "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
-        USER: "Translate the following segment into {target_lang_code} without any additional explanation: \"{text}\""
+        USER: "Translate the following segment into {target_lang_code} without any additional explanation. Rules: - JUST provide translated text in raw format\n\n- For proper names referring to people, objects, and places, translated into Latin transliteration\n\nText: \"{text}\""
   
   v1.10:
-      MODEL_ID: "bunbohue/GLM-4-9B-0414-FP8"
+      MODEL_ID: "zai-org/GLM-4-9B-0414"
       PROMPT:
         SYSTEM: "You are a Japanese translator."
         USER: "First, translate the following segment into English: \"{text}\"\n. Second, base on the translated English text, translate to {target_lang_code} without any additional explanation:"
