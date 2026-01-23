@@ -1,4 +1,4 @@
-export GEMINI_API_KEY="AIzaSyDbz4lAfLJDlPhtYgC5s1xFQ_UW-c6ih5w"
+export GEMINI_API_KEY="AIzaSyBoD9lgsNJrAHvwsxb1wt31YcT__MLNJ58"
 export HF_TOKEN="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"
 export BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai/"
 
@@ -11,7 +11,7 @@ TEXT_COLUMN="text"
 DATASET_PATH="$PROJECT_ROOT/data/synthetic-data/input/$DATASET_NAME.jsonl"
 MODEL_NAME="gemini-3-flash-preview"
 TARGET_LANG_CODE="Traditional Chinese"
-START_ID=20727
+START_ID=40729
 END_ID=99999
 OUTPUT_PATH="$PROJECT_ROOT/data/synthetic-data/output/$TIMESTAMP-$TARGET_LANG_CODE.json"
 

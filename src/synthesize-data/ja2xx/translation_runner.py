@@ -170,7 +170,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--text_column", type=str, default="text")
     parser.add_argument("--dataset_path", type=str)
-    parser.add_argument("--model_name", type=str, default="gemini-3-flash")
+    parser.add_argument("--model_name", type=str, default="gemini-3-flash-preview")
     parser.add_argument("--target_lang_code", type=str, required=True)
     parser.add_argument("--start_id", type=int, required=True)
     parser.add_argument("--end_id", type=int, required=True)
