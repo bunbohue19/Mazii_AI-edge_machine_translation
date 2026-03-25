@@ -21,7 +21,7 @@ with open("config/config.yml") as f:
     config = yaml.safe_load(f)["VERSION"][os.getenv("VERSION")]
 
 class SGLangServer:
-    def __init__(self, model_path: str, adapter_path: Optional[str] = None, host: str = "0.0.0.0", port: int = 8888):
+    def __init__(self, model_path: str, adapter_path: Optional[str] = None, host: str = "0.0.0.0", port: int = 8501):
         self.model_path = model_path
         self.adapter_path = adapter_path
         self.system_prompt = config["PROMPT"]["SYSTEM"]
@@ -62,6 +62,7 @@ class SGLangServer:
                     "tp_size": 1,  # Adjust based on GPU setup
                     "mem_fraction_static": 0.80,  # Adjust based on available VRAM
                     "context_length": 8192,  # Adjust based on model capabilities
+                    "quantization": "fp8", 
                 }
                 
                 # Add adapter configuration if provided

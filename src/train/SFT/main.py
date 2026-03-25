@@ -12,9 +12,9 @@ from huggingface_hub import login
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
-SYSTEM_PROMPT = "You are a Japanese interpreter and would like to translate from Japanese to other languages ​​or from other languages ​​to Japanese."
-USER_PROMPT = "Please translate the following segment into {target_lang_code} without any additional explanation, while fully capturing the style, nuance, and practical context of {target_lang_code}: \"{text}\""
-MAX_SEQ_LENGTH = 4096
+SYSTEM_PROMPT = ""
+USER_PROMPT = "Translate the following segment into {target_lang_code}, without additional explanation.\n\n{text}"
+MAX_SEQ_LENGTH = 2048
 DTYPE = torch.bfloat16
 LOAD_IN_4BIT = False
 
@@ -23,7 +23,7 @@ DATASET_NAME = os.getenv("DATASET_NAME")
 DATASET_PATH = f"{PROJECT_ROOT}/data/train/{DATASET_NAME}.json"
 
 TIME = datetime.now().strftime("%H-%M-%S_%d-%m-%Y")
-RUN_NAME = f"Mazii-MT-{TIME}"
+RUN_NAME = f"eUp-MT-{TIME}"
 
 def load_env_file(env_path: Path) -> None:
     """Populate os.environ entries from a simple KEY=VALUE .env file."""
@@ -86,23 +86,19 @@ if __name__ == "__main__":
     dataset = Dataset.from_pandas(df)
     dataset = dataset.shuffle()
     dataset = dataset.map(create_conversation, remove_columns=dataset.features, batched=False)
-    dataset = dataset.train_test_split(test_size=1e-2 * len(df) / len(df))      # 1% dataset for validation
+    dataset = dataset.train_test_split(test_size=2e-1 * len(df) / len(df))      # 20% dataset for validation
 
     # Define model init arguments
     model_kwargs = dict(
-        attn_implementation="eager",                          # Use "flash_attention_2" when running on Ampere or newer GPU
+        attn_implementation="eager",                    # Use "flash_attention_2" when running on Ampere or newer GPU
         dtype=torch.bfloat16,                           # What torch dtype to use, defaults to auto
         device_map="auto",                              # Let torch decide how to load the model
     )
 
-    # # BitsAndBytesConfig: Enables 4-bit quantization to reduce model size/memory usage
-    # model_kwargs["quantization_config"] = BitsAndBytesConfig(
-    #     load_in_4bit=True,
-    #     bnb_4bit_use_double_quant=True,
-    #     bnb_4bit_quant_type='nf4',
-    #     bnb_4bit_compute_dtype=model_kwargs['dtype'],
-    #     bnb_4bit_quant_storage=model_kwargs['dtype'],
-    # )
+    # BitsAndBytesConfig: Enables 8-bit quantization to reduce model size/memory usage
+    model_kwargs["quantization_config"] = BitsAndBytesConfig(
+        load_in_8bit=True,
+    )
 
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
@@ -124,24 +120,24 @@ if __name__ == "__main__":
         logging_dir=f"{PROJECT_ROOT}/logs",
         logging_steps=1,
         logging_strategy="steps",
-        per_device_train_batch_size=64,
-        per_device_eval_batch_size=64,
+        per_device_train_batch_size=2,
+        per_device_eval_batch_size=2,
         gradient_accumulation_steps=1,
         # ddp_find_unused_parameters=False,  # Distributed training settings
         # ddp_timeout=3600,                  # Distributed training settings. 1 hour timeout for distributed operations
-        num_train_epochs=3,
+        num_train_epochs=1,
         max_steps=-1,                      # -1 means train for full epochs
         learning_rate=1e-5,
         lr_scheduler_type="cosine",
-        warmup_steps=10,
+        warmup_steps=100,
         weight_decay=0.01,
         optim="paged_adamw_8bit",         
         max_grad_norm=0.3,
         gradient_checkpointing=True,
         eval_strategy="steps",
-        eval_steps=10,
+        eval_steps=1000,
         save_strategy="steps",
-        save_steps=50,
+        save_steps=1000,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         bf16=True,                        
@@ -151,6 +147,7 @@ if __name__ == "__main__":
         packing=False,                     # Don't pack multiple samples together for translation
         seed=3407,
         report_to="tensorboard",           
+        loss_type="dft"
     )
     
     # SFT Trainer with chat template formatting
