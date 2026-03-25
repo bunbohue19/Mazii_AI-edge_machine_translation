@@ -29,7 +29,7 @@ def main():
                     help="Path to the LoRA adapter directory (containing adapter_model.safetensors)")
     parser.add_argument("--host", type=str, default="0.0.0.0",
                     help="Host to bind the server to")
-    parser.add_argument("--port", type=int, default=8888,
+    parser.add_argument("--port", type=int, default=8501,
                     help="Port to bind the server to")
     parser.add_argument("--test", action="store_true",
                     help="Run test client instead of server")
